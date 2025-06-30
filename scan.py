@@ -18,5 +18,4 @@ def scan(prompt: object = '', ReturnType=None, error: object = ''):
                     return ast.literal_eval(user)
                 return user
             except ValueError:
-                print(error)
                 return user
