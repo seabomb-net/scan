@@ -1,21 +1,14 @@
-def scan(prompt: object = '', ReturnType=None, error: object = ''):
+def scan(ReturnType: type, prompt: object='', error: object=''):
     """Read a string from a standard input and validates a specified return type.
        Print error message if input and return type are incompatible."""
     if not isinstance(ReturnType, type | None):
         raise TypeError(f"invalid ReturnType argument for scan(): '{ReturnType}'")
-    import ast
     while True:
         user = input(prompt).strip()
-        if ReturnType:
-            try:
-                return ReturnType(ast.literal_eval(user))
-            except (ValueError, TypeError, SyntaxError):
-                print(error)
-                continue
-        else:
-            try:
-                if not isinstance((ast.literal_eval(user)), str):
-                    return ast.literal_eval(user)
-                return user
-            except (ValueError, TypeError, SyntaxError):
-                return user
+        if ReturnType is None:
+            return None
+        try:
+            return ReturnType(user)
+        except (ValueError, TypeError, SyntaxError):
+            print(error)
+            continue
