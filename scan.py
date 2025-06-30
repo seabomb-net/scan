@@ -9,8 +9,8 @@ def scan(prompt: object = '', ReturnType=None, error: object = ''):
         if ReturnType:
             try:
                 return ReturnType(user)
-            except Exception as e:
-                print(error, e)
+            except ValueError:
+                print(error)
                 continue
         else:
             try:
