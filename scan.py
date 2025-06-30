@@ -8,8 +8,8 @@ def scan(prompt: object = '', ReturnType=None, error: object = ''):
         user = input(prompt).strip()
         if ReturnType:
             try:
-                return ReturnType(user)
-            except ValueError:
+                return ReturnType(ast.literal_eval(user))
+            except (ValueError, TypeError, SyntaxError):
                 print(error)
                 continue
         else:
@@ -17,5 +17,5 @@ def scan(prompt: object = '', ReturnType=None, error: object = ''):
                 if not isinstance((ast.literal_eval(user)), str):
                     return ast.literal_eval(user)
                 return user
-            except ValueError:
+            except (ValueError, TypeError, SyntaxError):
                 return user
