@@ -9,6 +9,6 @@ def scan(ReturnType: type, prompt: object='', error: object=''):
             return None
         try:
             return ReturnType(user)
-        except (ValueError, TypeError, SyntaxError):
-            print(error)
+        except (ValueError, TypeError, SyntaxError) as e:
+            print(error if error else e)
             continue
